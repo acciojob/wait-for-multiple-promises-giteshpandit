@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const output = document.getElementById("output");
 
-  // By default, add a loading row
+  // Add a loading row with id="loading"
   const loadingRow = document.createElement("tr");
+  loadingRow.setAttribute("id", "loading");
   loadingRow.innerHTML = `<td colspan="2">Loading...</td>`;
   output.appendChild(loadingRow);
 
@@ -24,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Use Promise.all to wait for all promises to resolve
   Promise.all(promises).then((results) => {
     // Remove the loading row
-    output.innerHTML = "";
+    const loadingElement = document.getElementById("loading");
+    if (loadingElement) {
+      loadingElement.remove();
+    }
 
     // Loop through each promise result and add a row to the table
     results.forEach((result) => {
@@ -42,4 +46,5 @@ document.addEventListener("DOMContentLoaded", () => {
     output.appendChild(totalRow);
   });
 });
+
 
