@@ -1,4 +1,3 @@
-//your JS code here. If required.
 document.addEventListener("DOMContentLoaded", () => {
   const output = document.getElementById("output");
 
@@ -9,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to create a promise that resolves after a random time between 1 and 3 seconds
   function createPromise(promiseNum) {
-    const timeTaken = Math.random() * 2 + 1; // Random time between 1 and 3 seconds
+    const timeTaken = (Math.random() * 2 + 1).toFixed(3); // Random time between 1 and 3 seconds
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({ promiseNum, timeTaken });
-      }, timeTaken * 1000);
+      }, timeTaken * 1000); // Convert seconds to milliseconds
     });
   }
 
@@ -30,16 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Loop through each promise result and add a row to the table
     results.forEach((result) => {
       const row = document.createElement("tr");
-      row.innerHTML = `<td>Promise ${result.promiseNum}</td><td>${result.timeTaken.toFixed(3)}</td>`;
+      row.innerHTML = `<td>Promise ${result.promiseNum}</td><td>${result.timeTaken} s</td>`;
       output.appendChild(row);
     });
 
     // Calculate the total time taken
-    const totalTime = (Date.now() - startTime) / 1000;
+    const totalTime = ((Date.now() - startTime) / 1000).toFixed(3); // Convert to seconds
 
     // Add the total time row
     const totalRow = document.createElement("tr");
-    totalRow.innerHTML = `<td>Total</td><td>${totalTime.toFixed(3)}</td>`;
+    totalRow.innerHTML = `<td>Total</td><td>${totalTime} s</td>`;
     output.appendChild(totalRow);
   });
 });
